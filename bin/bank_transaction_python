@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BINPATH=`dirname $0`
+python "$BINPATH/../bank_transaction_python/main.py" $@
+
+
+# $0: shell script's name itself while exectuing
+# echo $0 will output bash
+# $1 and $2 refer to first argument and second argument respectively
+# $@ refers to all of a shel script's arguemnt: $1, $2, etc.
