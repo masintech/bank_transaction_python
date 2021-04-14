@@ -7,7 +7,6 @@ class Account:
     NextAccountNumber = 0
     # private varible will be named with _ as prefix
     def __init__(self, fname="", lname="", balance=0):
-        print(f"type Account.NextAccountNumber {type(Account.NextAccountNumber)}")
         self._firstName = fname
         self._lastName = lname
         self._balance = balance
@@ -42,17 +41,17 @@ class Account:
 
     def __str__(self):
         out = []
-        out.append(f"First Name: {self._firstName}")
-        out.append(f"Last Name: {self._lastName}")
-        out.append(f"Account Number: {self.getAccNo()}")
-        out.append(f"Balance: {self.getBalance()}")
+        out.append(f"{'Account Number' :<15}:{self.getAccNo() :>15}")
+        out.append(f"{'First Name' :<15}:{self._firstName :>15}")
+        out.append(f"{'Last Name' :<15}:{self._lastName :>15}")
+        out.append(f"{'Balance' :<15}:{self.getBalance() :>15}")
         return "\n".join(out)
 
     def account_read(self, lines):
-        self._accountNumber = lines.pop(0)
-        self._firstName = lines.pop(0)
-        self._lastName = lines.pop(0)
-        self._balance = lines.pop(0)
+        self._accountNumber = int(lines.pop(0))
+        self._firstName = lines.pop(0).strip()
+        self._lastName = lines.pop(0).strip()
+        self._balance = lines.pop(0).strip()
 
     def account_write(self, filename):
         f = open(filename, "a+")
