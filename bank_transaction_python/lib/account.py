@@ -7,11 +7,12 @@ class Account:
     NextAccountNumber = 0
     # private varible will be named with _ as prefix
     def __init__(self, fname="", lname="", balance=0):
-        Account.NextAccountNumber += 1
-        self._accountNumber = Account.NextAccountNumber
+        print(f"type Account.NextAccountNumber {type(Account.NextAccountNumber)}")
         self._firstName = fname
         self._lastName = lname
         self._balance = balance
+        Account.NextAccountNumber += 1
+        self._accountNumber = Account.NextAccountNumber
 
     def getAccNo(self):
         return self._accountNumber
@@ -54,7 +55,7 @@ class Account:
         self._balance = lines.pop(0)
 
     def account_write(self, filename):
-        f = open(filename,'a')
+        f = open(filename, "a+")
         lines = f.readlines()
         lines.append(f"{self._accountNumber}\n")
         lines.append(f"{self._firstName}\n")

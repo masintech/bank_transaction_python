@@ -10,7 +10,7 @@ class Bank:
         self.datafile_name = "Bank.data"
         self.accounts = {}
         try:
-            with open(datafile_name) as f:
+            with open(self.datafile_name, "r+") as f:
                 bank_data_lines = f.readlines()
                 while bank_data_lines:
                     acc = Account()
@@ -22,8 +22,8 @@ class Bank:
 
     def OpenAccount(self, fname, lname, balance):
         account = Account(fname, lname, balance)
-        self.accounts[acc.getAccNo()] = account
-        account.write_lines(datafile_name)
+        self.accounts[account.getAccNo()] = account
+        account.account_write(self.datafile_name)
         return account
 
     def BalanceEquiry(self, accountNumber):
@@ -45,8 +45,9 @@ class Bank:
         for key in self.account.keys():
             print(self.accounts[key])
 
-    def __del__(self):
-        with open(self.datafile_name):
-            for account in self.accounts:
-                account.writelines(self.datafile_name)
-        print("Close with file written")
+    # def __del__(self):
+    #     with open(self.datafile_name, "w"):
+    #         for account in self.accounts.values():
+    #             print(account)
+    #             account.account_write(self.datafile_name)
+    #     print("Close with file written")
