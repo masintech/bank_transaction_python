@@ -18,7 +18,7 @@ class Bank:
                     acc.setLastAccountNumber(acc.getAccNo())
                     self.accounts[acc.getAccNo()] = acc
         except IOError as error:
-            print("Faile to open file Bank.data")
+            print("Faile to open file Bank.data", error)
 
     def OpenAccount(self, fname, lname, balance):
         account = Account(fname, lname, balance)
@@ -37,8 +37,12 @@ class Bank:
             return self.accounts[accountNumber]
 
     def Deposit(self, accountNumber, amount):
-        accounts[accountNumber].Deposit(amount)
-        return self.accounts[accountNumber]
+        try:
+            self.accounts[accountNumber].Deposit(amount)
+        except KeyError as err:
+            print("The account number doesn't exist ", err)
+        else:
+            return self.accounts[accountNumber]
 
     def WithDraw(self, accountNumber, amount):
         account[accountNumber].WithDraw(amount)

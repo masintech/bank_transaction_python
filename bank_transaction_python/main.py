@@ -53,12 +53,16 @@ class BankClient:
 
     def balance_enquiry(self):
         accountNumber = input("Enter Account Number: ")
-        if check_numeric_input(accountNumber):
+        if check_numeric_input(accountNumber, level=1):
             acc = self.bank.BalanceEquiry(int(accountNumber))
             print(f"Your Account Details:\n{acc}")
 
     def deposit(self):
-        pass
+        accountNumber = input("Enter Account Number: ")
+        Amount = input("Enter Deposit Amount: ")
+        if check_numeric_input(accountNumber, level=1) and check_numeric_input(Amount) :
+            acc = self.bank.Deposit(int(accountNumber),int(Amount))
+            print(f"Your Account Details:\n{acc}")
 
     def withdraw(self):
         pass

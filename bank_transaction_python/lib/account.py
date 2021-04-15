@@ -51,7 +51,7 @@ class Account:
         self._accountNumber = int(lines.pop(0))
         self._firstName = lines.pop(0).strip()
         self._lastName = lines.pop(0).strip()
-        self._balance = lines.pop(0).strip()
+        self._balance = int(lines.pop(0).strip())
 
     def account_write(self, filename):
         f = open(filename, "a+")
