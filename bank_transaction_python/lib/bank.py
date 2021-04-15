@@ -28,7 +28,13 @@ class Bank:
 
     def BalanceEquiry(self, accountNumber):
         # return the account class for displaying
-        return self.accounts[accountNumber]
+        try:
+            self.accounts[accountNumber]
+        except KeyError as err:
+            print("The account number doesn't exist ", err)
+            return None
+        else:
+            return self.accounts[accountNumber]
 
     def Deposit(self, accountNumber, amount):
         accounts[accountNumber].Deposit(amount)
