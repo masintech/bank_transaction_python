@@ -1,6 +1,3 @@
-class InsufiicientFunds:
-    pass
-
 
 class Account:
     MIN_BALANCE = 500
@@ -30,8 +27,11 @@ class Account:
 
     def WithDraw(self, amount):
         if self._balance - amount < Account.MIN_BALANCE:
-            raise InsufiicientFunds
-        self._balance -= amount
+            print("Not enough balance in this account")
+            print(f"The minimum blance is {Account.MIN_BALANCE}")
+            print(f'You only have {self._balance}')
+        else:
+            self._balance -= amount
 
     def setLastAccountNumber(self, accountNumber):
         Account.NextAccountNumber = accountNumber

@@ -43,13 +43,14 @@ class BankClient:
     def __init__(self, bank):
         self.bank = bank
 
-    def open_acc_instruct(self):
+    def open_account(self):
         fname = input("Enter First Name: ")
         lname = input("Enter Last Name: ")
         balance = input("Enter initial Balance: ")
         if check_numeric_input(balance):
-            acc = self.bank.OpenAccount(fname.strip(), lname.strip(), balance)
-            print(acc)
+            acc = self.bank.OpenAccount(fname.strip(), lname.strip(), int(balance))
+            if acc:
+                print(acc)
 
     def balance_enquiry(self):
         accountNumber = input("Enter Account Number: ")
@@ -65,7 +66,11 @@ class BankClient:
             print(f"Your Account Details:\n{acc}")
 
     def withdraw(self):
-        pass
+        accountNumber = input("Enter Account Number: ")
+        Amount = input("Enter Withdraw Amount: ")
+        if check_numeric_input(accountNumber, level=1) and check_numeric_input(Amount) :
+            acc = self.bank.WithDraw(int(accountNumber),int(Amount))
+            print(f"Your Account Details:\n{acc}")
 
     def close_account(self):
         pass
@@ -80,8 +85,8 @@ class BankClient:
         sys.exit()
 
     def get_choice(self, opt):
-        funct = {
-            "1": self.open_acc_instruct,
+        action = {
+            "1": self.open_account,
             "2": self.balance_enquiry,
             "3": self.deposit,
             "4": self.withdraw,
@@ -91,7 +96,7 @@ class BankClient:
         }.get(
             opt, print_default_instruct
         )  # 9 is default if x not found
-        funct()
+        action()
 
 
 def main():
@@ -101,7 +106,6 @@ def main():
     while choice != 7:
         print_instruct()
         choice = input(f"{'Enter your choice: ':<25}")
-        print(f"Your choose {choice}")
         bank_client.get_choice(choice)
         print("\n")
 

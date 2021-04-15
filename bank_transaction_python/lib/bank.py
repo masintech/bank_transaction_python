@@ -21,10 +21,15 @@ class Bank:
             print("Faile to open file Bank.data", error)
 
     def OpenAccount(self, fname, lname, balance):
-        account = Account(fname, lname, balance)
-        self.accounts[account.getAccNo()] = account
-        account.account_write(self.datafile_name)
-        return account
+        if balance >= Account.MIN_BALANCE:
+            account = Account(fname, lname, balance)
+            self.accounts[account.getAccNo()] = account
+            account.account_write(self.datafile_name)
+            return account
+        else:
+            print(f"The minum balance is {Account.MIN_BALANCE}")
+            print("Open account rejected!!")
+            return None
 
     def BalanceEquiry(self, accountNumber):
         # return the account class for displaying
@@ -45,7 +50,10 @@ class Bank:
             return self.accounts[accountNumber]
 
     def WithDraw(self, accountNumber, amount):
-        account[accountNumber].WithDraw(amount)
+        try:
+            self.accounts[accountNumber].WithDraw(amount)
+        except KeyError as err:
+            print("The account number doesn't exist ", err)
         return self.accounts[accountNumber]
 
     def CloseAccount(self, accountNumber):
