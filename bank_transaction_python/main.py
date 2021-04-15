@@ -18,21 +18,26 @@ def print_instruct():
 def print_default_instruct():
     print("Please enter correct choice:")
 
-def check_numeric_input(input):
+
+def check_numeric_input(input, level=2):
     try:
         # integer is an acceptable data type
         val = int(input)
     except ValueError:
-        try:
-            # float is the other acceptable data type 
-            val = float(input)
-        except ValueError:
-            print("Input must be numeric!")
+        if level == 2:
+            try:
+                # float is the other acceptable data type
+                val = float(input)
+            except ValueError:
+                print("Input must be numeric!")
+                print("Please try again!!")
+                return False
+        else:
+            print("Input must be integer!")
             print("Please try again!!")
             return False
     return True
 
-        
 
 class BankClient:
     def __init__(self, bank):
@@ -47,9 +52,10 @@ class BankClient:
             print(acc)
 
     def balance_enquiry(self):
-        accountNumber = input("Enter Account Number")
-        acc = self.bank.BalanceEquiry(accountNumber)
-        print(f"Your Account Details: {acc}")
+        accountNumber = input("Enter Account Number: ")
+        if check_numeric_input(accountNumber):
+            acc = self.bank.BalanceEquiry(int(accountNumber))
+            print(f"Your Account Details:\n{acc}")
 
     def deposit(self):
         pass
@@ -63,14 +69,14 @@ class BankClient:
     def show_all_accounts(self):
         for account in self.bank.accounts.values():
             print(account)
-            print('\n')
+            print("\n")
 
     def quit_system(self):
         del self.bank
         sys.exit()
 
     def get_choice(self, opt):
-        funct= {
+        funct = {
             "1": self.open_acc_instruct,
             "2": self.balance_enquiry,
             "3": self.deposit,
@@ -88,12 +94,12 @@ def main():
     b = Bank()
     bank_client = BankClient(b)
     choice = 0
-    while choice!=7:
+    while choice != 7:
         print_instruct()
         choice = input(f"{'Enter your choice: ':<25}")
-        print(f'Your choose {choice}')
+        print(f"Your choose {choice}")
         bank_client.get_choice(choice)
-        print('\n')
+        print("\n")
 
 
 if __name__ == "__main__":
