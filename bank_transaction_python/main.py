@@ -19,7 +19,7 @@ def print_default_instruct():
     print("Please enter correct choice:")
 
 
-def check_numeric_input(input, level=2):
+def check_numeric_input(input, level=1):
     try:
         # integer is an acceptable data type
         val = int(input)
@@ -54,21 +54,21 @@ class BankClient:
 
     def balance_enquiry(self):
         accountNumber = input("Enter Account Number: ")
-        if check_numeric_input(accountNumber, level=1):
+        if check_numeric_input(accountNumber):
             acc = self.bank.BalanceEquiry(int(accountNumber))
             print(f"Your Account Details:\n{acc}")
 
     def deposit(self):
         accountNumber = input("Enter Account Number: ")
         Amount = input("Enter Deposit Amount: ")
-        if check_numeric_input(accountNumber, level=1) and check_numeric_input(Amount) :
+        if check_numeric_input(accountNumber) and check_numeric_input(Amount) :
             acc = self.bank.Deposit(int(accountNumber),int(Amount))
             print(f"Your Account Details:\n{acc}")
 
     def withdraw(self):
         accountNumber = input("Enter Account Number: ")
         Amount = input("Enter Withdraw Amount: ")
-        if check_numeric_input(accountNumber, level=1) and check_numeric_input(Amount) :
+        if check_numeric_input(accountNumber) and check_numeric_input(Amount) :
             acc = self.bank.WithDraw(int(accountNumber),int(Amount))
             print(f"Your Account Details:\n{acc}")
 

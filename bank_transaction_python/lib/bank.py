@@ -63,9 +63,9 @@ class Bank:
         for key in self.account.keys():
             print(self.accounts[key])
 
-    # def __del__(self):
-    #     with open(self.datafile_name, "w"):
-    #         for account in self.accounts.values():
-    #             print(account)
-    #             account.account_write(self.datafile_name)
-    #     print("Close with file written")
+    def __del__(self):
+        with open(self.datafile_name, "w"):
+            for account in self.accounts.values():
+                print(account)
+                account.account_write(self.datafile_name)
+        print("Close with file written")
