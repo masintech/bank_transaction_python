@@ -18,6 +18,21 @@ def print_instruct():
 def print_default_instruct():
     print("Please enter correct choice:")
 
+def check_numeric_input(input):
+    try:
+        # integer is an acceptable data type
+        val = int(input)
+    except ValueError:
+        try:
+            # float is the other acceptable data type 
+            val = float(input)
+        except ValueError:
+            print("Input must be numeric!")
+            print("Please try again!!")
+            return False
+    return True
+
+        
 
 class BankClient:
     def __init__(self, bank):
@@ -27,8 +42,9 @@ class BankClient:
         fname = input("Enter First Name: ")
         lname = input("Enter Last Name: ")
         balance = input("Enter initial Balance: ")
-        acc = self.bank.OpenAccount(fname.strip(), lname.strip(), balance)
-        print(acc)
+        if check_numeric_input(balance):
+            acc = self.bank.OpenAccount(fname.strip(), lname.strip(), balance)
+            print(acc)
 
     def balance_enquiry(self):
         accountNumber = input("Enter Account Number")
@@ -77,6 +93,7 @@ def main():
         choice = input(f"{'Enter your choice: ':<25}")
         print(f'Your choose {choice}')
         bank_client.get_choice(choice)
+        print('\n')
 
 
 if __name__ == "__main__":
