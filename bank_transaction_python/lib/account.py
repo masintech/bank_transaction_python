@@ -1,4 +1,5 @@
 
+
 class Account:
     MIN_BALANCE = 500
     NextAccountNumber = 0
@@ -22,6 +23,7 @@ class Account:
     def getBalance(self):
         return self._balance
 
+
     def Deposit(self, amount):
         self._balance += amount
 
@@ -32,6 +34,7 @@ class Account:
             print(f'You only have {self._balance}')
         else:
             self._balance -= amount
+
 
     def setLastAccountNumber(self, accountNumber):
         Account.NextAccountNumber = accountNumber
@@ -62,3 +65,4 @@ class Account:
         lines.append(f"{self._balance}\n")
         f.writelines(lines)
         f.close()
+
