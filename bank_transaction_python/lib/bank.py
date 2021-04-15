@@ -57,7 +57,12 @@ class Bank:
         return self.accounts[accountNumber]
 
     def CloseAccount(self, accountNumber):
-        self.accounts.pop(accountNumber)
+        try:
+            self.accounts.pop(accountNumber)
+            self.ShowAllAccounts()
+        except KeyError:
+            print("The account number doesn't exist ")
+            print("Plese check before doing it again!\n")
 
     def ShowAllAccounts(self):
         for key in self.account.keys():

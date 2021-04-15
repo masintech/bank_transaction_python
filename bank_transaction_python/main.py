@@ -73,12 +73,12 @@ class BankClient:
             print(f"Your Account Details:\n{acc}")
 
     def close_account(self):
-        pass
+        accountNumber = input("Enter Account Number: ")
+        if check_numeric_input(accountNumber):
+            acc = self.bank.CloseAccount(int(accountNumber))
 
     def show_all_accounts(self):
-        for account in self.bank.accounts.values():
-            print(account)
-            print("\n")
+        self.bank.show_all_accounts()
 
     def quit_system(self):
         del self.bank
