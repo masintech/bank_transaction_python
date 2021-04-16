@@ -64,4 +64,7 @@ class Item(unittest.TestCase):
         filename = bank.datafile_name
         del bank
         self.assertTrue(os.path.isfile(filename))
-        
+
+
+if __name__ == "__main__":
+    unittest.main()
