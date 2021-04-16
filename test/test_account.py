@@ -1,6 +1,4 @@
 import unittest
-import sys
-import os
 import copy
 from bank_transaction_python.lib.account import Account
 

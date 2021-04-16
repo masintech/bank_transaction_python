@@ -3,8 +3,8 @@ from .account import Account
 
 
 class Bank:
-    def __init__(self):
-        self.datafile_name = "Bank.data"
+    def __init__(self, datafile_name="Bank.data"):
+        self.datafile_name = datafile_name
         self.accounts = {}
         try:
             with open(self.datafile_name, "r+") as f:
@@ -12,10 +12,15 @@ class Bank:
                 while bank_data_lines:
                     acc = Account()
                     acc.account_readlines(bank_data_lines)
-                    acc.setLastAccountNumber(acc.getAccNo())
+                    if bank_data_lines: 
+                        acc.setLastAccountNumber(acc.getAccNo())
                     self.accounts[acc.getAccNo()] = acc
         except IOError as error:
             print("Faile to open file Bank.data", error)
+
+    def CloseAllAccounts(self):
+        self.accounts = {}
+        Account.NextAccountNumber = 0 
 
     def OpenAccount(self, fname, lname, balance):
         if balance >= Account.MIN_BALANCE:
