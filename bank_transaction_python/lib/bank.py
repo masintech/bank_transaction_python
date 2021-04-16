@@ -1,8 +1,5 @@
 import os
-import sys
-
-sys.path.append(os.path.abspath(os.path.dirname(__file__)))
-from account import Account
+from .account import Account
 
 
 class Bank:
@@ -14,7 +11,7 @@ class Bank:
                 bank_data_lines = f.readlines()
                 while bank_data_lines:
                     acc = Account()
-                    acc.account_read(bank_data_lines)
+                    acc.account_readlines(bank_data_lines)
                     acc.setLastAccountNumber(acc.getAccNo())
                     self.accounts[acc.getAccNo()] = acc
         except IOError as error:
@@ -65,12 +62,11 @@ class Bank:
             print("Plese check before doing it again!\n")
 
     def ShowAllAccounts(self):
-        for key in self.account.keys():
+        for key in self.accounts.keys():
             print(self.accounts[key])
 
     def __del__(self):
         with open(self.datafile_name, "w"):
             for account in self.accounts.values():
-                print(account)
                 account.account_write(self.datafile_name)
         print("Close with file written")

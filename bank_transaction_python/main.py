@@ -1,6 +1,4 @@
 from lib.bank import Bank
-from lib.account import Account
-import sys
 
 
 def print_instruct():
@@ -50,6 +48,7 @@ class BankClient:
         if check_numeric_input(balance):
             acc = self.bank.OpenAccount(fname.strip(), lname.strip(), int(balance))
             if acc:
+                print('\n Account Detail:')
                 print(acc)
 
     def balance_enquiry(self):
@@ -78,11 +77,11 @@ class BankClient:
             acc = self.bank.CloseAccount(int(accountNumber))
 
     def show_all_accounts(self):
-        self.bank.show_all_accounts()
+        self.bank.ShowAllAccounts()
 
     def quit_system(self):
         del self.bank
-        sys.exit()
+        raise SystemExit("Exit the bank system...")
 
     def get_choice(self, opt):
         action = {

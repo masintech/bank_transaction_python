@@ -1,4 +1,3 @@
-
 class Account:
     MIN_BALANCE = 500
     NextAccountNumber = 0
@@ -29,14 +28,14 @@ class Account:
         if self._balance - amount < Account.MIN_BALANCE:
             print("Not enough balance in this account")
             print(f"The minimum blance is {Account.MIN_BALANCE}")
-            print(f'You only have {self._balance}')
+            print(f'You only have {self._balance - amount} after withdraw')
         else:
             self._balance -= amount
 
     def setLastAccountNumber(self, accountNumber):
         Account.NextAccountNumber = accountNumber
 
-    def getLastAccountNumber(self, accountNumber):
+    def getLastAccountNumber(self):
         return Account.NextAccountNumber
 
     def __str__(self):
@@ -47,7 +46,11 @@ class Account:
         out.append(f"{'Balance' :<15}:{self.getBalance() :>15}")
         return "\n".join(out)
 
-    def account_read(self, lines):
+    def account_readlines(self, lines):
+        """ to consume lines as account object
+        Args:
+            lines ([list]): [lines from file.readlines()]
+        """
         self._accountNumber = int(lines.pop(0))
         self._firstName = lines.pop(0).strip()
         self._lastName = lines.pop(0).strip()
